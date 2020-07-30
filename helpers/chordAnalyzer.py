@@ -12,11 +12,7 @@ class ChordAnalyzer:
             return []  
 
         # Identify Triads
-        if len(uniqueNotes) < 5 :
-            return self.identifyChords(uniqueNotes)
-
-        return []
-
+        return self.identifyChords(uniqueNotes)
 
     def identifyChords(self, notes):
         # Iterate over the notes finding distances between each
@@ -34,11 +30,8 @@ class ChordAnalyzer:
             # The chord identifier will be a string representing all the intervals between
             # each note starting at the ith position.
             chordIdentifier = " ".join(intervals)
-            if chordIdentifier in triads:
-                chords.append("{}{}".format(notes[i], triads[chordIdentifier]))
-
-            if chordIdentifier in sevenths:
-                chords.append("{}{}".format(notes[i], sevenths[chordIdentifier]))
+            if chordIdentifier in allChords:
+                chords.append("{}{}".format(notes[i], allChords[chordIdentifier]))
 
         return chords
         

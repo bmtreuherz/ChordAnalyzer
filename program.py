@@ -19,7 +19,6 @@ def main():
 
         # Identify if the combination of notes forms a chord
         chords = chordAnalyzer.analyze(notes)
-
         # Display the notes played and any chords formed.
         displayAdapter.onUpdate(notes, chords)
 

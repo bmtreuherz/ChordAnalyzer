@@ -21,26 +21,24 @@ class DisplayAdapter:
             # If we found a chord, make the text green
             fontColor = (0, 169, 127)
             message = " ".join(chords)
-            self.drawChordMessage(message, fontColor)
+            self.renderMessage(message, fontColor, 80)
 
         if notes:
             message = " ".join(notes)
-            self.drawNotesMessage(message, fontColor)
+            self.renderMessage(message, fontColor, 40, 70)
         
         pygame.display.update()
-    
-    def drawChordMessage(self, message, color):
-        # Draw chord text
-        font = pygame.font.Font('freesansbold.ttf', 80)
-        textSurface = font.render(message, True, color)
-        textRec = textSurface.get_rect()
-        textRec.center = ((self.screenW/2), (self.screenH/2))
-        self.screen.blit(textSurface, textRec)
 
-    def drawNotesMessage(self, message, color):
-        # Draw notes text
-        font = pygame.font.Font('freesansbold.ttf', 40)
-        textSurface = font.render(message, True, color)
-        textRec = textSurface.get_rect()
-        textRec.center = ((self.screenW/2), (self.screenH/2) + 70)
+    def renderMessage(self, message, color, fontSize, verticalOffset=0):
+        textTooBig = True
+        while (textTooBig):
+            font = pygame.font.Font('freesansbold.ttf', fontSize)
+            textSurface = font.render(message, True, color)
+            textRec = textSurface.get_rect()
+
+            if (textRec.width < self.screenW):
+                textTooBig = False
+            fontSize -= 5
+
+        textRec.center = ((self.screenW/2), (self.screenH/2) + verticalOffset)
         self.screen.blit(textSurface, textRec)
